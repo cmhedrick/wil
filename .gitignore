@@ -1,0 +1,6 @@
+*.pyc
+*.swp
+*.swo
+/venv/
+db.sqlite3
+django-start.py
