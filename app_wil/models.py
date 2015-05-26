@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from datetime import date, datetime
 
 # Create your models here.
+class UserProfile (models.Model):
+    user = models.OneToOneField(User, related_name='user_profile')
+        def __str__(self):
+		
 class Tardy(models.Model):
     APPOINTMENT = "Appointment"
     D_APPOINTMENT = "Dentist Appointment"
@@ -40,15 +44,15 @@ class Tardy(models.Model):
     profile = models.ForeignKey(UserProfile, related_name="tardy_set")
     tardy_datetime = models.DateTimeField(default=datetime.now())
     period = models.CharField(max_length=100, choices=PERIOD_CHOICES)
+    excuse = models.CharField(max_length=100, choices=EXCUSES_CHOICES)
     assessment = models.CharField(max_length=100)
-    correct = models.BooleanField()
-    level = models.CharField(max_length=100)
+    note = models.BooleanField()
     
     class Meta:
         verbose_name_plural = "Tardies"
     
     def __str__(self):
-        return "Attempt %s %s %s/%s/%s/%s" % (self.profile.user.username, self.attempt_datetime, self.level, self.assessment, self.word, self.correct)
+        return "%s: %s" % (self.profile.user.first_name, self.date)
 
     @property
     def time(self):
