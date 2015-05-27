@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app_will import models
+from app_wil import models
 
 for attr, item in [(attr, getattr(models, attr)) for attr in dir(models)]:
 	if 'django.db.models.base.ModelBase'not in str(item.__class__):

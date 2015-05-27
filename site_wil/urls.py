@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+#from django.views import generic
+#from django.conf.urls import patterns, include, url
+
+from app_wil import views, models
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^tardy/$', views.TardyFormView.as_view()),
 ]

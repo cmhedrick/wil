@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date, datetime
-
-# Create your models here.
-class UserProfile (models.Model):
-    user = models.OneToOneField(User, related_name='user_profile')
-        def __str__(self):
+import django.utils.timezone
 		
 class Tardy(models.Model):
     APPOINTMENT = "Appointment"
@@ -27,7 +23,7 @@ class Tardy(models.Model):
         ('4', '4'),
         ('5', '5'),
     )
-    EXCUSES_CHOICES = (
+    EXCUSE_CHOICES = (
         (APPOINTMENT, 'Appointment'),
         (D_APPOINTMENT, 'Dentist Appointment'),
         (DR_APPOINTMENT, 'Dr. Appointment'),
@@ -41,24 +37,23 @@ class Tardy(models.Model):
         (WORK, 'Work'),
         (OTHER, 'Other'),
     )
-    profile = models.ForeignKey(UserProfile, related_name="tardy_set")
-    tardy_datetime = models.DateTimeField(default=datetime.now())
+    tardy_datetime = models.DateTimeField(default=django.utils.timezone.now())
     period = models.CharField(max_length=100, choices=PERIOD_CHOICES)
-    excuse = models.CharField(max_length=100, choices=EXCUSES_CHOICES)
-    assessment = models.CharField(max_length=100)
+    excuse = models.CharField(max_length=100, choices=EXCUSE_CHOICES)
     note = models.BooleanField()
+    name = models.CharField(max_length=100)
     
     class Meta:
         verbose_name_plural = "Tardies"
     
     def __str__(self):
-        return "%s: %s" % (self.profile.user.first_name, self.date)
+        return "%s: %s" % (self.name, self.date)
 
     @property
     def time(self):
-        return self.attempt_datetime.strftime('%I:%M:%S %P')
+        return self.tardy_datetime.strftime('%I:%M:%S %P')
 
     @property
     def date(self):
-        return self.attempt_datetime.strftime('%m/%d/%Y')
+        return self.tardy_datetime.strftime('%m/%d/%Y')
 
