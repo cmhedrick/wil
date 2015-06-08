@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 #from django.views import generic
 #from django.conf.urls import patterns, include, url
 
@@ -22,6 +23,7 @@ from app_wil import views, models
 
 
 urlpatterns = [
+	url(r'^$', RedirectView.as_view(url="/tardy/")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tardy/$', views.TardyFormView.as_view()),
 ]

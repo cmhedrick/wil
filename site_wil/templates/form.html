@@ -8,26 +8,29 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
 </head>
 <body>
-    <div>
-        <nav>
-            <a href="/">Home</a>
-        </nav>
-        <h1 id="page_title">
-            Tardy Form
-        </h1>
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+    <div id="header">
+        <div id="title">
+            <h1>Tardy Form</h1>
+        </div>
+        <img src="http://hiltinstitute.net/static/images/logo.png" id ="img">
+    </div>
+    <div id="main">
         <form action="" method="post">{% csrf_token %}
             <table id="form">
                 <tbody>
                     {% for field in form %}
                         <tr>
-                            <td width="50%">{{ field.label_tag }}</td>
-                            <td width="25%">{{ field }}</td>
+                            <td width="30%">{{ field.label_tag }}</td>
+                            <td width="70%">{{ field }}</td>
                             <td width="25%">{{ field.errors }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <div>        
+            <div style="text-align: center;">        
             <input type="submit" value="Submit" id="submit_button" />
             </div>
         </form>

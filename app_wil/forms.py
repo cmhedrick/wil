@@ -11,7 +11,8 @@ class AddTardyForm(forms.Form):
     name = forms.CharField(
         widget = forms.TextInput(attrs={
             'placeholder': "Full Name"
-        })
+        }),
+        required = False
     )
     tardy_date = forms.DateField(
         widget = SelectDateWidget(
@@ -27,7 +28,8 @@ class AddTardyForm(forms.Form):
         required = True
     )
     note = forms.BooleanField(
-        widget = forms.CheckboxInput()
+        widget = forms.CheckboxInput(),
+        required = False
     )
         
     def save(self):
