@@ -12,7 +12,7 @@ class AddTardyForm(forms.Form):
         widget = forms.TextInput(attrs={
             'placeholder': "Full Name"
         }),
-        required = False
+        required = True
     )
     tardy_date = forms.DateField(
         widget = SelectDateWidget(
@@ -29,6 +29,12 @@ class AddTardyForm(forms.Form):
     )
     note = forms.BooleanField(
         widget = forms.CheckboxInput(),
+        required = False
+    )
+    other = forms.CharField(
+        widget = forms.TextInput(attrs={
+            'placeholder': "Other Excuse"
+        }),
         required = False
     )
         

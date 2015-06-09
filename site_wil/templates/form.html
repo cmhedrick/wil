@@ -6,6 +6,30 @@
     <link href="/static/css/form.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script type="text/javascript">
+        function hideFields() {
+            $("input#id_other").hide();
+            $("label[for=id_other]").hide();
+        }
+        function showFields() {
+            $("input#id_other").show();
+            $("label[for=id_other]").show();
+        }
+        $(document).ready(function() {
+            if($("select#id_excuse").val() != "Other") {
+                    hideFields()
+                }
+            $("select#id_excuse").change(function(){
+                if($("select#id_excuse").val() != "Other") {
+                    hideFields()
+                }
+                else {
+                    showFields()
+                }
+            });
+        });
+    </script>
+
 </head>
 <body>
     <nav>
